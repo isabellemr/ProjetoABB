@@ -1,17 +1,21 @@
 package classes;
 
 public class NoArvore {
-    int			valor;
-    NoArvore	direita;
-    NoArvore	esquerda;
+
+    String nome;
+    int rgm;
+    NoArvore direita;
+    NoArvore esquerda;
 
     public NoArvore(){
-        this.valor = 0;
+        this.rgm = 0;
+        this.nome = null;
         this.direita = null;
         this.esquerda = null;
     }
-    public NoArvore(int novovalor){
-        this.valor = novovalor;
+    public NoArvore(int novovalor, String nome){
+        this.rgm = novovalor;
+        this.nome = nome;
         this.direita = null;
         this.esquerda = null;
     }
@@ -20,24 +24,25 @@ public class NoArvore {
         if(no == null)
             return null;
 
-        if(no.valor > valorprocurado)
+        if(no.rgm > valorprocurado)
             return busca(no.esquerda, valorprocurado);
-        else if(no.valor < valorprocurado)
+        else if(no.rgm < valorprocurado)
             return busca(no.direita, valorprocurado);
         else
             return no;
     }
 
-    public NoArvore insere(NoArvore no, int novovalor) {
+    public NoArvore insere(NoArvore no, int novovalor, String nomeAluno) {
         if(no == null) {
             no = new NoArvore();
-            no.valor = novovalor;
+            no.rgm = novovalor;
+            no.nome = nomeAluno;
             no.esquerda = no.direita = null;
         }
-        else if(novovalor < no.valor)
-            no.esquerda = insere(no.esquerda, novovalor);
-        else if(novovalor > no.valor)
-            no.direita = insere(no.direita, novovalor);
+        else if(novovalor < no.rgm)
+            no.esquerda = insere(no.esquerda, novovalor, nomeAluno);
+        else if(novovalor > no.rgm)
+            no.direita = insere(no.direita, novovalor, nomeAluno);
 
         return no;
     }
@@ -45,7 +50,7 @@ public class NoArvore {
     public void imprime(NoArvore raiz) {
         if (raiz != null) {
             imprime(raiz.esquerda);
-            System.out.println(raiz.valor);
+            System.out.println("RGM: " + raiz.rgm + "\nNome: " + raiz.nome);
             imprime(raiz.direita);
         }
     }
@@ -54,9 +59,9 @@ public class NoArvore {
         // faz a busca pelo valor a ser removido
         if (raiz == null)
             return null;
-        else if (raiz.valor > valoraremover)
+        else if (raiz.rgm > valoraremover)
             raiz.esquerda = remove(raiz.esquerda, valoraremover);
-        else if (raiz.valor < valoraremover)
+        else if (raiz.rgm < valoraremover)
             raiz.direita = remove(raiz.direita, valoraremover);
         else {	// passar por aqui significa que achou o n� com o
             // valora remover procurado e agora vai remov�-lo
@@ -81,8 +86,8 @@ public class NoArvore {
                     sub_esquerda = sub_esquerda.direita;
                 }
                 // aqui a sub_esquerda.valor tem o maior valor
-                raiz.valor = sub_esquerda.valor;
-                sub_esquerda.valor = valoraremover;
+                raiz.rgm = sub_esquerda.rgm;
+                sub_esquerda.rgm = valoraremover;
                 raiz.esquerda = remove(raiz.esquerda, valoraremover);
             }
         }

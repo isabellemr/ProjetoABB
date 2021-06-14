@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Principal {
 
-    static File arquivo = new File("C:\\Users\\isabe\\IdeaProjects\\ProjetoABB\\src\\support\\arquivo.txt");
+    static File arquivo = new File("C:\\Users\\David\\IdeaProjects\\ProjetoABB\\src\\support\\arquivo.txt");
     static NoArvore abb = new NoArvore();
 
     public static void main(String[] args) {
@@ -52,7 +52,6 @@ public class Principal {
                     System.out.println("Digite o RGM que deseja remover: ");
                     rgm = input.nextInt();
                     abb.remove(abb, rgm);
-                    System.out.println("Deseja remover outro aluno? (s/n)");
                     break;
 
                 //Pesquisar
@@ -69,7 +68,14 @@ public class Principal {
 
                 //Exibir arvore
                 case 5:
+                    System.out.println("Imprimindo em Pré-ordem:");
                     abb.imprimePre(abb);
+                    System.out.println("===================================");
+                    System.out.println("Imprimindo em Em-ordem:");
+                    abb.imprime(abb);
+                    System.out.println("===================================");
+                    System.out.println("Imprimindo em Pró-ordem:");
+                    abb.imprimePos(abb);
                     break;
 
             }

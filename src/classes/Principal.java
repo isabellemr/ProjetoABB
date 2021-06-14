@@ -1,16 +1,23 @@
 package classes;
 
 import classes.NoArvore;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.Scanner;
 
 public class Principal {
 
-    public static void main(String[] args) {
+    static File arquivo = new File("C:\\Users\\isabe\\IdeaProjects\\ProjetoABB\\src\\support\\arquivo.txt");
+    static NoArvore abb = new NoArvore();
 
-        NoArvore abb = new NoArvore();
+    public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
         Scanner inputString = new Scanner(System.in);
+
+        lerArquivo();
 
         //ATRIBUTOS
         int menu = 99;
@@ -62,7 +69,7 @@ public class Principal {
 
                 //Exibir arvore
                 case 5:
-                    abb.imprime(abb);
+                    abb.imprimePre(abb);
                     break;
 
             }
@@ -72,6 +79,28 @@ public class Principal {
 
         input.close();
         inputString.close();
+    }
+
+    public static void lerArquivo() {
+        try {
+            FileReader arq = new FileReader(arquivo);
+            BufferedReader lerArq = new BufferedReader(arq);
+
+            String linha = lerArq.readLine();
+
+            while(linha != null) {
+                int mat = Integer.parseInt(linha);
+                linha = lerArq.readLine();
+                String nom = linha;
+
+                abb.insere(abb, mat, nom);
+
+                linha = lerArq.readLine();
+            }
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+
     }
 
 }

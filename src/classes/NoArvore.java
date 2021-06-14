@@ -55,6 +55,22 @@ public class NoArvore {
         }
     }
 
+    public void imprimePre(NoArvore raiz) {
+        if (raiz != null) {
+            System.out.println("RGM: " + raiz.rgm + "\nNome: " + raiz.nome);
+            imprime(raiz.esquerda);
+            imprime((raiz.direita));
+        }
+    }
+
+    public void imprimePos(NoArvore raiz) {
+        if (raiz != null) {
+            imprime(raiz.esquerda);
+            imprime((raiz.direita));
+            System.out.println("RGM: " + raiz.rgm + "\nNome: " + raiz.nome);
+        }
+    }
+
     public NoArvore remove(NoArvore raiz, int valoraremover) {
         // faz a busca pelo valor a ser removido
         if (raiz == null)

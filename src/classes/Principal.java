@@ -1,16 +1,23 @@
 package classes;
 
 import classes.NoArvore;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.Scanner;
 
 public class Principal {
 
-    public static void main(String[] args) {
+    static File arquivo = new File("C:\\Users\\David\\IdeaProjects\\ProjetoABB\\src\\support\\arquivo.txt");
+    static NoArvore abb = new NoArvore();
 
-        NoArvore abb = new NoArvore();
+    public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
         Scanner inputString = new Scanner(System.in);
+
+        lerArquivo();
 
         //ATRIBUTOS
         int menu = 99;
@@ -45,7 +52,6 @@ public class Principal {
                     System.out.println("Digite o RGM que deseja remover: ");
                     rgm = input.nextInt();
                     abb.remove(abb, rgm);
-                    System.out.println("Deseja remover outro aluno? (s/n)");
                     break;
 
                 //Pesquisar
@@ -62,7 +68,14 @@ public class Principal {
 
                 //Exibir arvore
                 case 5:
+                    System.out.println("Imprimindo em Pré-ordem:");
+                    abb.imprimePre(abb);
+                    System.out.println("===================================");
+                    System.out.println("Imprimindo em Em-ordem:");
                     abb.imprime(abb);
+                    System.out.println("===================================");
+                    System.out.println("Imprimindo em Pró-ordem:");
+                    abb.imprimePos(abb);
                     break;
 
             }
@@ -72,6 +85,28 @@ public class Principal {
 
         input.close();
         inputString.close();
+    }
+
+    public static void lerArquivo() {
+        try {
+            FileReader arq = new FileReader(arquivo);
+            BufferedReader lerArq = new BufferedReader(arq);
+
+            String linha = lerArq.readLine();
+
+            while(linha != null) {
+                int mat = Integer.parseInt(linha);
+                linha = lerArq.readLine();
+                String nom = linha;
+
+                abb.insere(abb, mat, nom);
+
+                linha = lerArq.readLine();
+            }
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+
     }
 
 }
